@@ -16,12 +16,14 @@ const FULL_HEART = '♥'
     const heart = event.target
     heart.innerText = EMPTY_HEART
     mimicServerCall()
+    //if server call is successful, change heart to full heart
       .then( responce => {
         (heart.innerText === EMPTY_HEART)? 
         (heart.innerText = FULL_HEART, heart.classList.add("activated-heart"))
         :(heart.innerText = EMPTY_HEART, heart.classList.remove("activated-heart")) 
      
       })
+      //if server call fails, display error message
       .catch(error => {
         modal.classList.remove("hidden");
         modal.querySelector("#modal-message").textContent = error;
@@ -31,6 +33,7 @@ const FULL_HEART = '♥'
       }) 
     
   }
+  //call event for each love icons
   hearts.forEach( heart => {
     heart.addEventListener("click", likePost)
   })
